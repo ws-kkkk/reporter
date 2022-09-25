@@ -27,7 +27,7 @@ def login_and_reporter():
     try:
         options = webdriver.ChromeOptions()
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
-        # options.add_argument("headless")  #在linux无可视化界面下，不添加此参数会导致失败
+        options.add_argument("headless")  #在linux无可视化界面下，不添加此参数会导致失败
         driver = webdriver.Chrome(service=service, options=options)
         driver.get(url)
         print(driver.title)
@@ -61,7 +61,10 @@ def login_and_reporter():
         elif tips == "提交":
             write_info(driver)
             driver.find_element(By.XPATH, "/html/body/div/div/div[2]/form/div[2]/button").click() # 打卡提交
-            time.sleep(2)
+            time.sleep(1)
+            # 打卡成功过后会自动跳转到打卡历史页面，这里切换到打卡页面
+            driver.find_element(By.XPATH, "/html/body/div/div/div[1]/div[1]/div/div[1]/span").click()
+            time.sleep(1)
             after_tips = driver.find_element(By.XPATH, "/html/body/div/div/div[2]/form/div[2]/button/div/span").get_attribute("innerHTML")
             print(after_tips)
             if after_tips == "已打卡":
