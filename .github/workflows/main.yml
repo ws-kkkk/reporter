@@ -37,3 +37,4 @@ jobs:
       - run: |
            echo $SETTING > "report_setting.json"
            ls -la
+           cat report_setting.json
