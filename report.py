@@ -47,7 +47,7 @@ def login_and_reporter():
         elif title in "重庆邮电大学统一身份认证平台" or title == "Unified Identity Authentication":
             msg = "学号或密码错误 或者 登录频繁，需要验证码"
             print(f"Error: {msg}")
-            # send_email(error=msg)
+            send_email(error=msg)
             driver.quit()
             return
 
@@ -61,8 +61,8 @@ def login_and_reporter():
             print("今日已打卡，请勿重复打卡。")
         elif tips == "提交":
             write_info(driver)
-            # driver.find_element(By.XPATH, "/html/body/div/div/div[2]/form/div[2]/button").click() # 打卡提交
-            # time.sleep(1)
+            driver.find_element(By.XPATH, "/html/body/div/div/div[2]/form/div[2]/button").click() # 打卡提交
+            time.sleep(1)
             after_tips = driver.find_element(By.XPATH, "/html/body/div/div/div[2]/form/div[2]/button/div/span").get_attribute("innerHTML")
             if after_tips == "已打卡":
                 print("提交成功，已打卡")
@@ -75,7 +75,7 @@ def login_and_reporter():
     except Exception as e:
         print("程序发生异常，打卡失败！！")
         print(str(e))
-        # send_email(error="程序运行异常")
+        send_email(error="程序运行异常")
 
 
 def send_email(text="每日健康打卡", error=""):

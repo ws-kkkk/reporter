@@ -10,7 +10,7 @@ on:
   pull_request:
     branches: [ "main" ]
   schedule:
-    - cron: '0 9-16/2 * * *'
+    - cron: "0 9-16/3 * * *"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -36,5 +36,5 @@ jobs:
         run: pip install -r requirement.txt
       
       - run: |
-        echo $SETTING > "report_setting.json"
-        python ./report.py
+          echo $SETTING > "report_setting.json"
+          python ./report.py
