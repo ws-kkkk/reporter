@@ -27,7 +27,7 @@ def login_and_reporter():
     try:
         options = webdriver.ChromeOptions()
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
-        # options.add_argument("headless")  #在linux无可视化界面下，不添加此参数会导致失败
+        options.add_argument("headless")  # 浏览器不提供可视化页面. linux下如果系统不支持可视化不加这条会启动失败
         driver = webdriver.Chrome(service=service, options=options)
         driver.get(url)
         print(driver.title)
