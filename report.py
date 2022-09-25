@@ -11,7 +11,7 @@ import json
 service = Service(executable_path=ChromeDriverManager().install())
 url = "https://ids.cqupt.edu.cn/authserver/login?service=http%3A%2F%2Fehall.cqupt.edu.cn%2Fpublicapp%2Fsys%2Fcyxsjkdkmobile%2F*default%2Findex.html"
 
-with open("./report_setting.json", 'r', encoding="utf-8") as f:
+with open("report_setting.json", 'r', encoding="utf-8") as f:
     default_str = f.read()
 opt = json.loads(default_str)
 username = opt["cqupt"]["username"]
