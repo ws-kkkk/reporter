@@ -36,6 +36,7 @@ def Login():
             driver.quit()
         else:
             print("登录成功")
+        time.sleep(100)
 
     except Exception as e:
         print("异常，登录失败")
