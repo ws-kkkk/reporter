@@ -36,4 +36,4 @@ jobs:
       
       - run: |
            echo $SETTING > "report_setting.json"
-           python ./report.py
+           ls -la
