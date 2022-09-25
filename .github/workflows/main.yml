@@ -33,7 +33,9 @@ jobs:
       # set up requirement
       - name: install requirement
         run: pip install -r requirement.txt
-      
-      - run: |
-           echo ${{ secrets.SETTINGS }}
-           ls -la
+      - name: report
+        env: 
+          SETTINGS: ${{ secrets.SETTINGS }}
+        run: |
+           echo $SETTINGS > "report_setting.json"
+           python ./report.py
