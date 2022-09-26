@@ -51,9 +51,8 @@ def login_and_reporter():
             driver.quit()
             return
 
-        #=============== 这里处理一下重复打卡 =====================
+        #=============== 处理重复打卡 =====================
         time.sleep(2)
-
         tips = driver.find_element(By.XPATH, "/html/body/div/div/div[2]/form/div[2]/button/div/span").get_attribute("innerHTML")
         print(tips)
         if tips == "已打卡":
@@ -62,9 +61,12 @@ def login_and_reporter():
             write_info(driver)
             driver.find_element(By.XPATH, "/html/body/div/div/div[2]/form/div[2]/button").click() # 打卡提交
             time.sleep(1)
-            # 打卡成功过后会自动跳转到打卡历史页面，这里切换到打卡页面
-            driver.find_element(By.XPATH, "/html/body/div/div/div[1]/div[1]/div/div[1]/span").click()
+            # 打卡成功后会有确认选项
+            driver.find_element(By.XPATH, "/html/body/div[3]/div[3]/button").click()
             time.sleep(1)
+            # 确认后会自动跳转到打卡历史页面，切换到打卡页面
+            driver.find_element(By.XPATH, "/html/body/div/div/div[1]/div[1]/div/div[1]/span").click()
+            time.sleep(2)
             after_tips = driver.find_element(By.XPATH, "/html/body/div/div/div[2]/form/div[2]/button/div/span").get_attribute("innerHTML")
             print(after_tips)
             if after_tips == "已打卡":
@@ -77,7 +79,7 @@ def login_and_reporter():
     except Exception as e:
         print("程序发生异常，打卡失败！！")
         print(str(e))
-        send_email(error="程序运行异常")
+        # send_email(error="程序运行异常")
 
 
 def send_email(text="每日健康打卡", error=""):
